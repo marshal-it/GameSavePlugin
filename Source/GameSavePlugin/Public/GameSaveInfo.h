@@ -17,7 +17,6 @@
 			 4.装备数据：角色装备，装备掉落进度
 			 5.环境天气：环境布局，环境进度
  */
-
 //SlotName不允许重名，唯一存在，要不然会直接重置对象数据，但可以创建过个Slot对应在本地/Saved/SaveGames/SlotNameXX.sav
 
 UCLASS()
