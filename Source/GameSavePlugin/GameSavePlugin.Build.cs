@@ -19,7 +19,7 @@ public class GameSavePlugin : ModuleRules
 		PrivateIncludePaths.AddRange(
 			new string[] {
 				"GameSavePlugin/Private",
-                "GameSavePlugin/Public/Define"
+                "GameSavePlugin/Private/Define"
 				// ... add other private include paths required here ...
 			}
 			);
