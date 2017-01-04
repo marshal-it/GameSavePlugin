@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/SaveGame.h"
+#include "SaveDataStruct.h"
 #include "GameSaveInfo.generated.h"
 
 /**
@@ -33,5 +34,6 @@ class GAMESAVEPLUGIN_API UGameSaveInfo : public USaveGame
 	*/
 public:
 
+	//TArray<>
 	
 };

@@ -15,11 +15,17 @@ struct FBaseData
 {
 	GENERATED_USTRUCT_BODY()
 public:
+	UPROPERTY(BlueprintReadWrite)
 	int32 UniqueId; //独一ID
+	UPROPERTY(BlueprintReadWrite)
 	FString Name;   //名字
 	FBaseData()
 		: UniqueId(0)
 		, Name("") {}
+	void Reset() 
+	{
+		Name = "";
+	}
 };
 
 //内存对象数据结构
@@ -44,13 +50,18 @@ struct FActorData : public FObjectData
 {
 	GENERATED_USTRUCT_BODY()
 public:
+	UPROPERTY(BlueprintReadWrite)
 	FTransform WorldTransform; //方位
+	UPROPERTY(BlueprintReadWrite)
 	bool bHideInGame; //是否显示
+	UPROPERTY(BlueprintReadWrite)
+	FString AssetPath; //资源路径
 	FActorData()
 		:Super()
 	{
 		WorldTransform = FTransform(FRotator::ZeroRotator, FVector::ZeroVector, FVector(1.0f));
 		bHideInGame = true;
+		AssetPath = "";
 	}
 };
 
