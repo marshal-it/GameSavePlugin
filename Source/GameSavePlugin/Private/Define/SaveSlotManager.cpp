@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "GameSavePluginPrivatePCH.h"
 #include "SaveSlotManager.h"
@@ -143,4 +143,61 @@ void USaveSlotManager::UpdateSaveData(FBaseData& Data, SAVESLOT_TYPE_DEFINE Data
 		break;
 	}
 	}
+}
+
+UGameSaveInfo* USaveSlotManager::GetGameSaveInfoInstance()
+{
+	if (GameSaveInfoRef == nullptr)
+	{
+		GameSaveInfoRef = Cast<UGameSaveInfo>(UGameplayStatics::CreateSaveGameObject(GameSaveInfoClass));
+	}
+	return GameSaveInfoRef;
+}
+
+bool USaveSlotManager::SaveGameDataToCurrentSlot()
+{
+	//将内存数据拷贝到Slot
+	if (ObjectsDataMap.Num() != 0)
+	{
+		GetGameSaveInfoInstance()->ObjectsDataMap.Empty();
+		GetGameSaveInfoInstance()->ObjectsDataMap.Append(ObjectsDataMap);
+	}
+
+	if (ActorsDataMap.Num() != 0)
+	{
+		GetGameSaveInfoInstance()->ActorsDataMap.Empty();
+		GetGameSaveInfoInstance()->ActorsDataMap.Append(ActorsDataMap);
+	}
+		
+	if (CharacterDataMap.Num() != 0)
+	{
+		GetGameSaveInfoInstance()->CharacterDataMap.Empty();
+		GetGameSaveInfoInstance()->CharacterDataMap.Append(CharacterDataMap);
+	}
+
+	if (LevelDataMap.Num() != 0)
+	{
+		GetGameSaveInfoInstance()->LevelDataMap.Empty();
+		GetGameSaveInfoInstance()->LevelDataMap.Append(LevelDataMap);
+	}
+
+	if (GameInstanceDataMap.Num() != 0)
+	{
+		GetGameSaveInfoInstance()->GameInstanceDataMap.Empty();
+		GetGameSaveInfoInstance()->GameInstanceDataMap.Append(GameInstanceDataMap);
+	}
+
+	if (GameModeDataMap.Num() != 0)
+	{
+		GetGameSaveInfoInstance()->GameModeDataMap.Empty();
+		GetGameSaveInfoInstance()->GameModeDataMap.Append(GameModeDataMap);
+	}
+
+	if (GameStateDataMap.Num() != 0)
+	{
+		GetGameSaveInfoInstance()->GameStateDataMap.Empty();
+		GetGameSaveInfoInstance()->GameStateDataMap.Append(GameStateDataMap);
+	}
+
+	return UGameplayStatics::SaveGameToSlot(GetGameSaveInfoInstance(), SlotName, UserIndex);
 }

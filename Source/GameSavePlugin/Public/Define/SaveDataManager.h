@@ -56,6 +56,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "SaveData")
 	void ExecuteGetSaveDataAsSlot(int32 Slot, int32 DataId, SAVESLOT_TYPE_DEFINE DataType);
 
+	UFUNCTION(BlueprintCallable, Category = "SaveData")
+	bool SaveGameSlot(int32 SlotIndex = 0);
+
+	UFUNCTION(BlueprintCallable, Category = "SaveData")
+	bool CheckSaveGameSlotExist(FString SlotName);
+
+	UFUNCTION(BlueprintCallable, Category = "SaveData")
+	UGameSaveInfo* LoadGameDateFromSlot(FString SlotName);
 
 
 private:

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "UObject/NoExportTypes.h"
+#include "GameSaveInfo.h"
 #include "SaveSlotManager.generated.h"
 
 /**
@@ -48,8 +49,18 @@ public:
 	TMap<int32, FGameInstanceData> GetGameInstanceDataMap() { return GameInstanceDataMap; }
 	TMap<int32, FGameModeData> GetGameModeDataMap() { return GameModeDataMap; }
 	TMap<int32, FGameStateData> GetGameStateDataMap() { return GameStateDataMap; }
+
+	/*
+		保存数据到当前sav内存
+	*/
+	UGameSaveInfo* GetGameSaveInfoInstance();
+
+	bool SaveGameDataToCurrentSlot();
 	
 private:
+
+	TSubclassOf<UGameSaveInfo> GameSaveInfoClass = UGameSaveInfo::StaticClass();
+
 	//内存对象数据
 	TMap<int32, FObjectData> ObjectsDataMap;
 
@@ -71,4 +82,10 @@ private:
 	//游戏状态数据
 	TMap<int32, FGameStateData> GameStateDataMap;
 	
+	//Slot保存对象
+	UGameSaveInfo* GameSaveInfoRef = nullptr;
+
+	//SlotName
+	FString SlotName = "SaveSlotTest";
+	int32 UserIndex = 0;
 };

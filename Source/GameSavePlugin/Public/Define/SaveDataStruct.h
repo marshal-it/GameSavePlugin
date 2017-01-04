@@ -1,6 +1,7 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
+#include "SaveSlotType.h"
 #include "SaveDataStruct.generated.h"
 
  /**
@@ -19,9 +20,12 @@ public:
 	int32 UniqueId; //独一ID
 	UPROPERTY(BlueprintReadWrite)
 	FString Name;   //名字
+	UPROPERTY(BlueprintReadWrite)
+	DataState Sate; //数据状态
 	FBaseData()
 		: UniqueId(0)
-		, Name("") {}
+		, Name("") 
+	    , Sate(DataState::Last){}
 	void Reset() 
 	{
 		Name = "";
@@ -75,7 +79,7 @@ struct  FCharacterData : public FActorData
 	GENERATED_USTRUCT_BODY()
 public:
 	FCharacterData()
-		:Super(){}
+		:Super(){} 
 };
 
 //关卡数据结构

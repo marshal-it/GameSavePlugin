@@ -10,7 +10,7 @@ EVENT_TYPE_STR_DECL(GAMEMODE);
 EVENT_TYPE_STR_DECL(GAMESTATE);
 
 //UENUM（对应事件枚举定义）
-UENUM()
+UENUM(BlueprintType)
 enum class SAVESLOT_TYPE_DEFINE : uint8
 {
 	OBJECT,
@@ -20,4 +20,14 @@ enum class SAVESLOT_TYPE_DEFINE : uint8
 	GAMEINSTANCE,
 	GAMEMODE,
 	GAMESTATE
+};
+
+//数据状态
+UENUM(BlueprintType)
+enum class DataState : uint8
+{
+	Disabled //不需要更新
+	, Updating //更新中
+	, Last //最新
+	, Old //旧版本
 };

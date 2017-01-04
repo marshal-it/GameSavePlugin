@@ -16,6 +16,7 @@ void USaveDataManager::ExecuteGetSaveDataAsSlot(int32 Slot, int32 DataId, SAVESL
 	if (!SaveSlotManagerMap.Contains(Slot))
 	{
 		UE_LOG(SaveGame, Log, TEXT("Save Slot Index = %s not contained in map."), *FString::FormatAsNumber(Slot));
+		return;
 	}
 	
 	switch (DataType)
@@ -110,6 +111,27 @@ void USaveDataManager::ExecuteGetSaveDataAsSlot(int32 Slot, int32 DataId, SAVESL
 		break;
 	}
 	
+}
+
+bool USaveDataManager::SaveGameSlot(int32 SlotIndex /*= 0*/)
+{
+	return SaveSlotManagerMap[SlotIndex]->SaveGameDataToCurrentSlot();
+}
+
+bool USaveDataManager::CheckSaveGameSlotExist(FString SlotName)
+{
+	return UGameplayStatics::DoesSaveGameExist(SlotName, 0);
+}
+
+UGameSaveInfo* USaveDataManager::LoadGameDateFromSlot(FString SlotName)
+{
+	USaveGame* SaveGameRef = UGameplayStatics::LoadGameFromSlot(SlotName, 0);
+
+	if ( SaveGameRef != nullptr)
+	{
+		return Cast<UGameSaveInfo>(SaveGameRef);
+	}
+	return nullptr;
 }
 
 void USaveDataManager::UpdataSaveAsSlot(int32 Slot, FBaseData DataStruct, SAVESLOT_TYPE_DEFINE DataType)
